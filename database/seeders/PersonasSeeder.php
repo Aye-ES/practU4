@@ -14,16 +14,16 @@ class PersonasSeeder extends Seeder
      */
     public function run(): void
     {
-        //  
+
         Persona::create([
-            
+
             'nombre' => 'weimar',
             'apellido' => 'Ustares Rivera',
             'celular' => '8324893',
             'correo' => 'weimar@gmail.com',
 
- 
-           
+
+
             // Resto de los atributos
         ]);
     }

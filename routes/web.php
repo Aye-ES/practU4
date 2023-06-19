@@ -13,20 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
- //   return view('welcome');
-//});
+    Route::get('/', function () {
+    return view('welcome');
+    });
 
-Route::get('/', function () {
-     return view('personas.index');
-     // return view('personas.index', compact('personas'));
+// Route::get('/', function () {
+//      return view('personas.index');
+//      // return view('personas.index', compact('personas'));
 
-   });
+//    });
 //Route::resource('personas', 'PersonaController');
 
-use App\Http\Controllers\PersonaController;
+// use App\Http\Controllers\PersonaController;
 
-Route::get('/personas', [PersonaController::class, 'index'])->name('personas.index');
+// Route::get('/personas', [PersonaController::class, 'index'])->name('personas.index');
 
 Route::middleware([
     'auth:sanctum',
