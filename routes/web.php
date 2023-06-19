@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-    Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
-    });
+});
 
 // Route::get('/', function () {
 //      return view('personas.index');
@@ -36,4 +36,14 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/personas', function () {
+        return view('personas');
+    })->name('personas');
 });

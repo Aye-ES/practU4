@@ -1,0 +1,3 @@
+<div>
+    Componente Livewire
+</div>
