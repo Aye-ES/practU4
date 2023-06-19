@@ -29,7 +29,7 @@
                         <td class="rounded border px-4 py-2">{{ $persona->id }}</td>
                         <td class="rounded border px-4 py-2">{{ $persona->nombre }}</td>
                         <td class="rounded border px-4 py-2">{{ $persona->apellido }}</td>
-                        <td class="rounded border px-4 py-2">{{ number_format($persona->telefono) }}</td>
+                        <td class="rounded border px-4 py-2">{{ $persona->celular }}</td>
                         <td class="rounded border px-4 py-2">{{ $persona->correo }}</td>
                         <td class="rounded border px-4 py-2">Editar / Eliminar</td>
                     </tr>
