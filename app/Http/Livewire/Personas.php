@@ -12,11 +12,17 @@ class Personas extends Component
 
     public $q;
     public $persona;
+
+    public $sortBy = 'id';
+    public $sortAsc = true;
+
     public $confirmingPersonaDeletion = false;
     public $confirmingPersonaAdd = false;
 
     protected $queryString = [
-        'q' => ['except' => '']
+        'q' => ['except' => ''],
+        'sortBy' => ['except' => 'id'],
+        'sortAsc' => ['except' => true],
     ];
 
     protected $rules = [
@@ -34,7 +40,7 @@ class Personas extends Component
                 $query->whereRaw("lower(nombre) like lower(?)", ['%' . strtolower($this->q) . '%']);
                 $query->orWhereRaw("lower(apellido) like lower(?)", ['%' . strtolower($this->q) . '%']);
             });
-        });
+        })->orderBy($this->sortBy, $this->sortAsc ? 'ASC' : 'DESC');
         $persona = $persona->paginate(10);
         return view('livewire.personas', [
             'personas' => $persona,
@@ -44,6 +50,16 @@ class Personas extends Component
     public function updating()
     {
         $this->resetPage();
+    }
+
+    public function sortBy($field)
+    {
+        if ($field == $this->sortBy) {
+            $this->sortAsc = !$this->sortAsc;
+        }else{
+            $this->sortAsc = true;
+        }
+        $this->sortBy = $field;
     }
 
     public function confirmPersonaDeletion($id)
