@@ -43,7 +43,9 @@
                         <td class="rounded border px-4 py-2">{{ $persona->celular }}</td>
                         <td class="rounded border px-4 py-2">{{ $persona->correo }}</td>
                         <td class="rounded border px-4 py-2">
-                            Editar /
+                            <x-button wire:click="confirmPersonaEdit ({{ $persona->id }})" >
+                                Editar
+                            </x-button>
                             <x-danger-button wire:click="confirmPersonaDeletion ({{ $persona->id }})"
                                 wire:loading.attr="disabled">
                                 {{ __('Eliminar') }}
@@ -79,7 +81,7 @@
     </x-dialog-modal>
     <x-dialog-modal wire:model="confirmingPersonaAdd">
         <x-slot name="title">
-            {{ __('Agregar Persona') }}
+            {{ isset($this->persona->id) ? 'Editar Persona' : 'Agregar Persona' }}
         </x-slot>
 
         <x-slot name="content">

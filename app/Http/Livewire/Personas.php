@@ -29,15 +29,15 @@ class Personas extends Component
 
     public function render()
     {
-        $personas = Persona::when($this->q, function ($query) {
+        $persona = Persona::when($this->q, function ($query) {
             return $query->where(function ($query) {
                 $query->whereRaw("lower(nombre) like lower(?)", ['%' . strtolower($this->q) . '%']);
                 $query->orWhereRaw("lower(apellido) like lower(?)", ['%' . strtolower($this->q) . '%']);
             });
         });
-        $personas = $personas->paginate(10);
+        $persona = $persona->paginate(10);
         return view('livewire.personas', [
-            'personas' => $personas,
+            'personas' => $persona,
         ]);
     }
 
@@ -51,9 +51,9 @@ class Personas extends Component
         $this->confirmingPersonaDeletion = $id;
     }
 
-    public function deletePersona(Persona $personas)
+    public function deletePersona(Persona $persona)
     {
-        $personas->delete();
+        $persona->delete();
         $this->confirmingPersonaDeletion = false;
     }
 
@@ -63,14 +63,25 @@ class Personas extends Component
         $this->confirmingPersonaAdd = true;
     }
 
-    public function savePersona(){
+    public function savePersona()
+    {
         $this->validate();
-        Persona::create([
-            'nombre' => $this->persona['nombre'],
-            'apellido' => $this->persona['apellido'],
-            'celular' => $this->persona['celular'],
-            'correo' => $this->persona['correo'],
-        ]);
+        if (isset($this->persona->id)) {
+            $this->persona->save();
+        } else {
+            Persona::create([
+                'nombre' => $this->persona['nombre'],
+                'apellido' => $this->persona['apellido'],
+                'celular' => $this->persona['celular'],
+                'correo' => $this->persona['correo'],
+            ]);
+        }
         $this->confirmingPersonaAdd = false;
+    }
+
+    public function confirmPersonaEdit(Persona $persona)
+    {
+        $this->persona = $persona;
+        $this->confirmingPersonaAdd = true;
     }
 }
