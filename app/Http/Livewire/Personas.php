@@ -11,7 +11,7 @@ class Personas extends Component
     use WithPagination;
 
     public $q;
-    public $persona;
+    public $persona = null;
 
     public $sortBy = 'id';
     public $sortAsc = true;
@@ -35,17 +35,20 @@ class Personas extends Component
 
     public function render()
     {
-        $persona = Persona::when($this->q, function ($query) {
+        $personasQuery = Persona::when($this->q, function ($query) {
             return $query->where(function ($query) {
                 $query->whereRaw("lower(nombre) like lower(?)", ['%' . strtolower($this->q) . '%']);
                 $query->orWhereRaw("lower(apellido) like lower(?)", ['%' . strtolower($this->q) . '%']);
             });
         })->orderBy($this->sortBy, $this->sortAsc ? 'ASC' : 'DESC');
-        $persona = $persona->paginate(10);
+
+        $personas = $personasQuery->paginate(10);
+
         return view('livewire.personas', [
-            'personas' => $persona,
+            'personas' => $personas,
         ]);
     }
+
 
     public function updating()
     {
@@ -54,12 +57,12 @@ class Personas extends Component
 
     public function sortBy($field)
     {
-        if ($field == $this->sortBy) {
+        if ($field === $this->sortBy) {
             $this->sortAsc = !$this->sortAsc;
-        }else{
+        } else {
             $this->sortAsc = true;
+            $this->sortBy = $field;
         }
-        $this->sortBy = $field;
     }
 
     public function confirmPersonaDeletion($id)
@@ -73,16 +76,18 @@ class Personas extends Component
         $this->confirmingPersonaDeletion = false;
     }
 
-    public function confirmPersonaAdd()
+    public function confirmPersonaAdd(Persona $persona = null)
     {
         $this->reset(['persona']);
+        $this->persona = $persona;
         $this->confirmingPersonaAdd = true;
     }
+
 
     public function savePersona()
     {
         $this->validate();
-        if (isset($this->persona->id)) {
+        if (isset($this->persona['id'])) {
             $this->persona->save();
         } else {
             Persona::create([
