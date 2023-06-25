@@ -19,32 +19,52 @@
                 <tr>
                     <th class="px-4 py-2">
                         <div class="flex items-center">
-                            <button wire:click="sortBy('id')">ID</button>
-                            <x-sort-icon sortField="id" :sortBy="$sortBy" :sortAsc="$sortAsc" />
+                            <button wire:click="sortBy('id')">
+                                <div class="flex items-center">
+                                    ID
+                                    <x-sort-icon sortField="id" :sortBy="$sortBy" :sortAsc="$sortAsc" />
+                                </div>
+                            </button>
                         </div>
                     </th>
                     <th class="px-4 py-2">
                         <div class="flex items-center">
-                            <button wire:click="sortBy('nombre')">Nombre</button>
-                            <x-sort-icon sortField="nombre" :sortBy="$sortBy" :sortAsc="$sortAsc" />
+                            <button wire:click="sortBy('nombre')">
+                                <div class="flex items-center">
+                                    Nombre
+                                    <x-sort-icon sortField="nombre" :sortBy="$sortBy" :sortAsc="$sortAsc" />
+                                </div>
+                            </button>
                         </div>
                     </th>
                     <th class="px-4 py-2">
                         <div class="flex items-center">
-                            <button wire:click="sortBy('apellido')">Apellido</button>
-                            <x-sort-icon sortField="apellido" :sortBy="$sortBy" :sortAsc="$sortAsc" />
+                            <button wire:click="sortBy('apellido')">
+                                <div class="flex items-center">
+                                    Apellido
+                                    <x-sort-icon sortField="apellido" :sortBy="$sortBy" :sortAsc="$sortAsc" />
+                                </div>
+                            </button>
                         </div>
                     </th>
                     <th class="px-4 py-2">
                         <div class="flex items-center">
-                            <button wire:click="sortBy('celular')">Celular</button>
-                            <x-sort-icon sortField="celular" :sortBy="$sortBy" :sortAsc="$sortAsc" />
+                            <button wire:click="sortBy('celular')">
+                                <div class="flex items-center">
+                                    Celular
+                                    <x-sort-icon sortField="celular" :sortBy="$sortBy" :sortAsc="$sortAsc" />
+                                </div>
+                            </button>
                         </div>
                     </th>
                     <th class="px-4 py-2">
                         <div class="flex items-center">
-                            <button wire:click="sortBy('correo')">Correo</button>
-                            <x-sort-icon sortField="correo" :sortBy="$sortBy" :sortAsc="$sortAsc" />
+                            <button wire:click="sortBy('correo')">
+                                <div class="flex items-center">
+                                    Correo
+                                    <x-sort-icon sortField="correo" :sortBy="$sortBy" :sortAsc="$sortAsc" />
+                                </div>
+                            </button>
                         </div>
                     </th>
                 </tr>
